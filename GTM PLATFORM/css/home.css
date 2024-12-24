@@ -76,6 +76,10 @@
   position: relative;
 }
 
+.el-table .table tr th {
+  text-transform: uppercase;
+}
+
 .rounded {
   width: 8px;
   height: 8px;

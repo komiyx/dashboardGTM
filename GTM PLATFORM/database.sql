@@ -8,23 +8,17 @@ CREATE TABLE users(
 INSERT INTO users (username, email, password) VALUES
 ('kosm', 'komiyesheng@gmail.com', 'yesheng01');
 
-CREATE TABLE app(
-    appid int PRIMARY KEY AUTO_INCREMENT,
-    userid int NOT NULL,
-    appname varchar(200),
-    remark varchar(200),
-    appicon varchar(200),
-    numdownload int,
-    numcomment int,
-    agerestrict varchar(200),
-    appintro varchar(200),
-    imgdetails varchar(200),
-    tag VARCHAR(255) NOT NULL,
-    scores VARCHAR(200),    
-    commentname VARCHAR(200),
-    commentrate VARCHAR(200),
-    commenttext VARCHAR(200),
-    autocomments VARCHAR(200),
-    FOREIGN KEY (userid) REFERENCES users(Id)
+CREATE TABLE gtmrecord (
+    id int PRIMARY KEY AUTO_INCREMENT,
+    brandname varchar(200),
+    url varchar(200),
+    installdate date,
+    register int,
+    deposit int,
+    firstdatain date,
+    recentdatain date,
+    registerdatacollected date,
+    depositdatacollected date,
+    remark varchar(200)
 );
 

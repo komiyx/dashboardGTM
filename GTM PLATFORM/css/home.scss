@@ -112,6 +112,21 @@
             position: relative;
         }
     }
+
+}
+
+.el-table
+{
+    .table
+    {
+        tr
+        {
+            th
+            {
+                text-transform: uppercase;
+            } 
+        }
+    }
 }
 
 
@@ -172,3 +187,4 @@
 .image-upload-container:hover .delete-icon {
     display: block;
 }
+
