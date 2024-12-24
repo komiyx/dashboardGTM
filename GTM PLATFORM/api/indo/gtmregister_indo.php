@@ -40,7 +40,8 @@
         
         $stmt = $conn->prepare($query);
         if ($stmt) {
-            $created_time = date('Y-m-d H:i:s'); // Current time
+             $date = new DateTime('now', new DateTimeZone('Asia/Kuala_Lumpur'));
+            $created_time = $date->format('Y-m-d H:i:s');
             $stmt->bind_param("sssssssssss", $username, $password, $fname, $email, $mobile, $isBankSelected, $bank, $bankname, $bankno, $url, $created_time);
     
             // Execute the query

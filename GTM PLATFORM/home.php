@@ -13,7 +13,7 @@ if (!isset($_SESSION['valid'])) {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <title>GTMBest</title>
+    <title>GTMBest - INDO Data</title>
     <link rel="icon" href="/img/icon.webp">
     <link rel="icon" href="/img/aside-logo.png">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -59,14 +59,16 @@ if (!isset($_SESSION['valid'])) {
                                 </li>
                                 <div class="d-flex align-items-center">
                                     <div class="menu-item-title ">
-                                        PWA Tools
+                                        Section
                                     </div>
                                 </div>
                                 <li class="el-menu-item menu-item load-content">
-                                    <div class="menu-item-content d-flex align-items-center">
-                                        <i class="fa-brands fa-app-store"></i>
-                                        <span class="text-capitalize ml-3">Create PWA</span>
-                                    </div>
+                                    <a href="./indo_data.php" class="el-menu-item">
+                                        <div class="menu-item-content d-flex align-items-center">
+                                            <i class="fa-brands fa-app-store"></i>
+                                            <span class="text-capitalize ml-3">INDO DATA</span>
+                                        </div>
+                                    </a>
                                 </li>
                             </ul>
                         </div>
