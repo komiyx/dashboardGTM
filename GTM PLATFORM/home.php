@@ -140,7 +140,6 @@ if (!isset($_SESSION['valid'])) {
                                                                 <th>Install Date</th>
                                                                 <th>Register</th>
                                                                 <th>Deposit</th>
-                                                                <th>First Data In</th>
                                                                 <th>Recent Data Update</th>
                                                                 <th>Register Data Collected</th>
                                                                 <th>Deposit Data Collected</th>
@@ -148,13 +147,29 @@ if (!isset($_SESSION['valid'])) {
                                                         </thead>
                                                         <tbody>
                                                         <?php
+                                                            $targets = ['target', 'arena','ayo'];
+                                                            $subqueries = [];
 
-                                                            $query = "SELECT * FROM gtmrecord ORDER BY installdate DESC";
+                                                            // Generate subqueries dynamically
+                                                            foreach ($targets as $name) {
+                                                                $subqueries[] = "(SELECT COUNT(*) 
+                                                                                    FROM indo_user_records 
+                                                                                    WHERE indo_user_records.url LIKE CONCAT('%', '$name', '%')
+                                                                                ) AS register_count_$name";
+                                                                $subqueries[] = "(SELECT created_time
+                                                                                    FROM indo_user_records
+                                                                                    WHERE indo_user_records.url LIKE CONCAT('%', '$name', '%')
+                                                                                    ORDER BY created_time DESC
+                                                                                    LIMIT 1
+                                                                                ) AS recent_update_$name";
+                                                            }
+
+                                                            $query = "SELECT gtmrecord.*, " . implode(", ", $subqueries) . " FROM gtmrecord";
+
                                                             $result = $conn->query($query);
 
                                                             // Check if there are results
                                                             if ($result && $result->num_rows > 0) {
-                                                                // Loop through the results and output rows
                                                                 while ($row = $result->fetch_assoc()) {
                                                                     echo "<tr class='list-item'>";
                                                                     echo "<td>" . htmlspecialchars($row['country']) . "</td>";
@@ -163,6 +178,25 @@ if (!isset($_SESSION['valid'])) {
                                                                     echo "<td>" . htmlspecialchars($row['installdate']) . "</td>";
                                                                     echo "<td>" . htmlspecialchars($row['register']) . "</td>";
                                                                     echo "<td>" . htmlspecialchars($row['deposit']) . "</td>";
+                                                                    if (isset($row["url"]) && strpos($row["url"], "target") !== false) {
+                                                                        // If the 'url' contains "target", show the 'recent_update_target' column
+                                                                        echo "<td>" . htmlspecialchars($row["recent_update_target"] ?? '-') . "</td>";
+                                                                    }elseif(isset($row["url"]) && strpos($row["url"], "arena") !== false) {
+                                                                        echo "<td>" . htmlspecialchars($row["recent_update_arena"] ?? '-') . "</td>";
+                                                                    }elseif(isset($row["url"]) && strpos($row["url"], "ayo") !== false) {
+                                                                        echo "<td>" . htmlspecialchars($row["recent_update_ayo"] ?? '-') . "</td>";
+                                                                    }
+
+                                                                    if (isset($row["url"]) && strpos($row["url"], "target") !== false) {
+                                                                        // If the 'url' contains "target", show the 'recent_update_target' column
+                                                                        echo "<td>" . htmlspecialchars($row["register_count_target"] ?? '-') . "</td>";
+                                                                    }elseif(isset($row["url"]) && strpos($row["url"], "arena") !== false) {
+                                                                        echo "<td>" . htmlspecialchars($row["register_count_arena"] ?? '-') . "</td>";
+                                                                    }elseif(isset($row["url"]) && strpos($row["url"], "ayo") !== false) {
+                                                                        echo "<td>" . htmlspecialchars($row["register_count_ayo"] ?? '-') . "</td>";
+                                                                    }
+
+                                                                    echo "<td>-</td>"; // Additional static column
                                                                     echo "</tr>";
                                                                 }
                                                             } else {
@@ -170,6 +204,7 @@ if (!isset($_SESSION['valid'])) {
                                                                 echo "<tr><td colspan='11' class='text-center'>No records found.</td></tr>";
                                                             }
                                                         ?>
+
                                                         </tbody>
                                                     </table>
                                                 </div>
