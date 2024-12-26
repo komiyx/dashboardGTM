@@ -4,6 +4,8 @@ include("./auth/connect.php");
 if (!isset($_SESSION['valid'])) {
     header("Location: index.php");
 }
+
+
 ?>
 
 <!DOCTYPE html>
