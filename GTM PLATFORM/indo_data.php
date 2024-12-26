@@ -19,6 +19,7 @@ if (!isset($_SESSION['valid'])) {
     <link rel="icon" href="/img/icon.webp">
     <link rel="icon" href="/img/aside-logo.png">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link type="text/css" rel="stylesheet" href="./flaviusmatis-simplePagination.js-da97104/simplePagination.css"/>
     <link rel="preload" as="style" onload="this.onload=null; this.rel='stylesheet'" href="./css/style.css">
     <link rel="preload" as="style" onload="this.onload=null; this.rel='stylesheet'" href="./css/home.css">
     <!-- Boostrap CDN -->
@@ -177,47 +178,36 @@ if (!isset($_SESSION['valid'])) {
                                                         <tbody>
                                                             <?php
 
-                                                            $query = "SELECT username, password, fullname, email, mobile, bank_emoney_selected, bank_emoney, bank_emoney_name, bank_no_emoney_no, url, created_time FROM indo_user_records";
-                                                            $result = $conn->query($query);
-                                                            // Check if there are results
-                                                            if ($result && $result->num_rows > 0) {
-                                                                // Loop through the results and output rows
-                                                                while ($row = $result->fetch_assoc()) {
-                                                                    echo "<tr>";
-                                                                    echo "<td>" . htmlspecialchars($row['username']) . "</td>";
-                                                                    echo "<td>" . htmlspecialchars($row['password']) . "</td>";
-                                                                    echo "<td>" . htmlspecialchars($row['fullname']) . "</td>";
-                                                                    echo "<td>" . htmlspecialchars($row['email']) . "</td>";
-                                                                    echo "<td>" . htmlspecialchars($row['mobile']) . "</td>";
-                                                                    echo "<td>" . htmlspecialchars($row['bank_emoney_selected']) . "</td>";
-                                                                    echo "<td>" . htmlspecialchars($row['bank_emoney']) . "</td>";
-                                                                    echo "<td>" . htmlspecialchars($row['bank_emoney_name']) . "</td>";
-                                                                    echo "<td>" . htmlspecialchars($row['bank_no_emoney_no']) . "</td>";
-                                                                    echo "<td>" . htmlspecialchars($row['url']) . "</td>";
-                                                                    echo "<td>" . htmlspecialchars($row['created_time']) . "</td>";
-                                                                    echo "</tr>";
+                                                                $query = "SELECT username, password, fullname, email, mobile, bank_emoney_selected, bank_emoney, bank_emoney_name, bank_no_emoney_no, url, created_time FROM indo_user_records ORDER BY created_time DESC";
+                                                                $result = $conn->query($query);
+                                                                
+                                                                // Check if there are results
+                                                                if ($result && $result->num_rows > 0) {
+                                                                    // Loop through the results and output rows
+                                                                    while ($row = $result->fetch_assoc()) {
+                                                                        echo "<tr class='list-item'>";
+                                                                        echo "<td>" . htmlspecialchars($row['username']) . "</td>";
+                                                                        echo "<td>" . htmlspecialchars($row['password']) . "</td>";
+                                                                        echo "<td>" . htmlspecialchars($row['fullname']) . "</td>";
+                                                                        echo "<td>" . htmlspecialchars($row['email']) . "</td>";
+                                                                        echo "<td>" . htmlspecialchars($row['mobile']) . "</td>";
+                                                                        echo "<td>" . htmlspecialchars($row['bank_emoney_selected']) . "</td>";
+                                                                        echo "<td>" . htmlspecialchars($row['bank_emoney']) . "</td>";
+                                                                        echo "<td>" . htmlspecialchars($row['bank_emoney_name']) . "</td>";
+                                                                        echo "<td>" . htmlspecialchars($row['bank_no_emoney_no']) . "</td>";
+                                                                        echo "<td>" . htmlspecialchars($row['url']) . "</td>";
+                                                                        echo "<td>" . htmlspecialchars($row['created_time']) . "</td>";
+                                                                        echo "</tr>";
+                                                                    }
+                                                                } else {
+                                                                    // If no data is found
+                                                                    echo "<tr><td colspan='11' class='text-center'>No records found.</td></tr>";
                                                                 }
-                                                            } else {
-                                                                // If no data is found
-                                                                echo "<tr><td colspan='11' class='text-center'>No records found.</td></tr>";
-                                                            }
                                                             ?>
                                                         </tbody>
                                                     </table>
                                                 </div>
-                                                <div class="el-pagination is-background container-pagination mt-5 justify-content-end d-flex">
-                                                    <span class="el-pagination-total is-first">Total 1 page</span>
-                                                    <button type="button" class="btn-prev" disabled>
-                                                        <i class="fa-solid fa-angle-left"></i>
-                                                    </button>
-                                                    <ul class="el-pager">
-                                                        <li class="is-active number" aria-current="true"
-                                                            aria-label="第 1 页" tabindex="0"> 1 </li>
-                                                    </ul>
-                                                    <button type="button" class="btn-next" disabled>
-                                                        <i class="fa-solid fa-angle-right"></i>
-                                                    </button>
-                                                </div>
+                                                <div id="pagination-container" class="light-theme mt-4 d-flex justify-content-end"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -229,6 +219,34 @@ if (!isset($_SESSION['valid'])) {
             </div>
         </div>
     </main>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="./flaviusmatis-simplePagination.js-da97104/jquery.simplePagination.js"></script>
+    <script>
+
+            var items = $(".list-item");
+            var numItems = items.length;
+            var perPage = 10;
+
+            items.slice(perPage).hide();
+
+            $(document).ready(function () {
+
+
+                $('#pagination-container').pagination({
+                    items: numItems,
+                    itemsOnPage: perPage,
+                    prevText: "&laquo;",
+                    nextText: "&raquo;",
+                    onPageClick: function (pageNumber) {
+                        var showFrom = perPage * (pageNumber - 1);
+                        var showTo = showFrom + perPage;
+                        items.hide().slice(showFrom, showTo).show();
+                    }
+                });
+            });
+
+
+    </script>
 </body>
 
 </html>

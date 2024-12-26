@@ -119,34 +119,11 @@ if (!isset($_SESSION['valid'])) {
                                                 <form action="">
                                                     <div class="el-row d-flex justify-content-between">
                                                         <div class="el-row">
-                                                            <div class="el-form-item asterisk-left">
-                                                                <div class="el-form-item-content">
-                                                                    <div class="el-input-wrapper">
-                                                                        <span class="el-input-prefix">
-                                                                            <span class="el-input-prefix-inner">
-                                                                                <i
-                                                                                    class="fa-solid fa-magnifying-glass mr-3"></i>
-                                                                            </span>
-                                                                        </span>
-                                                                        <input type="text" class="el-input-inner"
-                                                                            autocomplete="off"
-                                                                            placeholder="Please search for the name"
-                                                                            id="search-pwa">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="el-form-item asterisk-left">
-                                                                <div class="el-form-item-content">
-                                                                    <button type="button"
-                                                                        class="el-button el-button-primary">
-                                                                        <span>Search</span>
-                                                                    </button>
-                                                                    <button type="button"
-                                                                        class="el-button el-button-reset"
-                                                                        style="margin-left: 12px;">
-                                                                        <span>Reset</span>
-                                                                    </button>
-                                                                </div>
+                                                            <div class="col-12">
+                                                                <button type="button" class="el-button el-button-primary px-4 py-1" data-toggle="modal"
+                                                                data-target="#addnew">
+                                                                    <span>Add New</span>
+                                                                </button>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -167,27 +144,36 @@ if (!isset($_SESSION['valid'])) {
                                                                 <th>Recent Data Update</th>
                                                                 <th>Register Data Collected</th>
                                                                 <th>Deposit Data Collected</th>
-                                                                <th>Remark</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            
+                                                        <?php
+
+                                                            $query = "SELECT * FROM gtmrecord ORDER BY installdate DESC";
+                                                            $result = $conn->query($query);
+
+                                                            // Check if there are results
+                                                            if ($result && $result->num_rows > 0) {
+                                                                // Loop through the results and output rows
+                                                                while ($row = $result->fetch_assoc()) {
+                                                                    echo "<tr class='list-item'>";
+                                                                    echo "<td>" . htmlspecialchars($row['country']) . "</td>";
+                                                                    echo "<td>" . htmlspecialchars($row['brandname']) . "</td>";
+                                                                    echo "<td>" . htmlspecialchars($row['url']) . "</td>";
+                                                                    echo "<td>" . htmlspecialchars($row['installdate']) . "</td>";
+                                                                    echo "<td>" . htmlspecialchars($row['register']) . "</td>";
+                                                                    echo "<td>" . htmlspecialchars($row['deposit']) . "</td>";
+                                                                    echo "</tr>";
+                                                                }
+                                                            } else {
+                                                                // If no data is found
+                                                                echo "<tr><td colspan='11' class='text-center'>No records found.</td></tr>";
+                                                            }
+                                                        ?>
                                                         </tbody>
                                                     </table>
                                                 </div>
-                                                <div class="el-pagination is-background container-pagination mt-5 justify-content-end d-flex">
-                                                    <span class="el-pagination-total is-first">Total 1 page</span>
-                                                    <button type="button" class="btn-prev" disabled>
-                                                        <i class="fa-solid fa-angle-left"></i>
-                                                    </button>
-                                                    <ul class="el-pager">
-                                                        <li class="is-active number" aria-current="true"
-                                                            aria-label="第 1 页" tabindex="0"> 1 </li>
-                                                    </ul>
-                                                    <button type="button" class="btn-next" disabled>
-                                                        <i class="fa-solid fa-angle-right"></i>
-                                                    </button>
-                                                </div>
+
                                             </div>
                                         </div>
                                     </div>
@@ -198,6 +184,59 @@ if (!isset($_SESSION['valid'])) {
                 </div>
             </div>
         </div>
+            <!-- Modal -->
+    <div class="modal fade" id="addnew" tabindex="-1" aria-labelledby="addnewLabel" aria-hidden="true">
+        <div class="modal-dialog  modal-dialog-centered">
+            <div class="modal-content mx-3">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addUserModalLabel">Order Now</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="./controller/add_brand.php" method="post">
+                        <div class="form-group">
+                            <label>Country:</label>
+                            <select name="country" id="country" class="form-control" required>
+                                <option value="INDO" id="country-1">INDO</option>
+                                <option value="MY" id="country-2">MY</option>
+                                <option value="TH" id="country-3">TH</option>
+                                <option value="BDT" id="country-4">BDT</option>
+                                <option value="HK" id="country-4">HK</option>
+                                <option value="AUD" id="country-4">AUD</option>
+                            </select>
+                        </div>    
+                        <div class="form-group">
+                            <label>BrandName:</label>
+                            <input type="text" class="form-control" name="brandname" required>
+                        </div>    
+                        <div class="form-group">
+                            <label>Website url:</label>
+                            <input type="text" class="form-control" name="url" required>
+                        </div>  
+                        <div class="form-group">
+                            <label>Register:</label>
+                            <select name="register" id="register" class="form-control" required>
+                                <option value="YES" id="register-1">YES</option>
+                                <option value="NO" id="register-2">NO</option>
+                            </select>
+                        </div>      
+                        <div class="form-group">
+                            <label>Deposit:</label>
+                            <select name="deposit" id="deposit" class="form-control" required>
+                                <option value="YES" id="deposit-1">YES</option>
+                                <option value="NO" id="deposit-2">NO</option>
+                            </select>
+                        </div>      
+                        <div class="col-12 m-0 p-0 mx-auto text-center">
+                            <button type="submit" class="btn btn-primary submit_btn" name="submit">Add New</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
     </main>
 </body>
 
