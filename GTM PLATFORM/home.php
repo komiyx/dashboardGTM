@@ -17,6 +17,7 @@ if (!isset($_SESSION['valid'])) {
     <link rel="icon" href="/img/icon.webp">
     <link rel="icon" href="/img/aside-logo.png">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link type="text/css" rel="stylesheet" href="./flaviusmatis-simplePagination.js-da97104/simplePagination.css"/>
     <link rel="preload" as="style" onload="this.onload=null; this.rel='stylesheet'" href="./css/style.css">
     <link rel="preload" as="style" onload="this.onload=null; this.rel='stylesheet'" href="./css/home.css">
     <!-- Boostrap CDN -->
@@ -147,7 +148,8 @@ if (!isset($_SESSION['valid'])) {
                                                         </thead>
                                                         <tbody>
                                                         <?php
-                                                            $targets = ['target', 'arena','ayo'];
+                                                            $targets = ['target', 'arena', 'ayo', 'tajir', 'pg', 'alitoto', 'plustogel', 'platinumslot', 'maxtoto',
+                                                                        'puma99', 'megafafa', 'auroratoto', 'garuda'];
                                                             $subqueries = [];
 
                                                             // Generate subqueries dynamically
@@ -164,8 +166,7 @@ if (!isset($_SESSION['valid'])) {
                                                                                 ) AS recent_update_$name";
                                                             }
 
-                                                            $query = "SELECT gtmrecord.*, " . implode(", ", $subqueries) . " FROM gtmrecord";
-
+                                                            $query = "SELECT gtmrecord.*, " . implode(", ", $subqueries) . " FROM gtmrecord ORDER BY installdate DESC";
                                                             $result = $conn->query($query);
 
                                                             // Check if there are results
@@ -178,24 +179,30 @@ if (!isset($_SESSION['valid'])) {
                                                                     echo "<td>" . htmlspecialchars($row['installdate']) . "</td>";
                                                                     echo "<td>" . htmlspecialchars($row['register']) . "</td>";
                                                                     echo "<td>" . htmlspecialchars($row['deposit']) . "</td>";
-                                                                    if (isset($row["url"]) && strpos($row["url"], "target") !== false) {
-                                                                        // If the 'url' contains "target", show the 'recent_update_target' column
-                                                                        echo "<td>" . htmlspecialchars($row["recent_update_target"] ?? '-') . "</td>";
-                                                                    }elseif(isset($row["url"]) && strpos($row["url"], "arena") !== false) {
-                                                                        echo "<td>" . htmlspecialchars($row["recent_update_arena"] ?? '-') . "</td>";
-                                                                    }elseif(isset($row["url"]) && strpos($row["url"], "ayo") !== false) {
-                                                                        echo "<td>" . htmlspecialchars($row["recent_update_ayo"] ?? '-') . "</td>";
+
+                                                                    // Determine recent_update and register_count dynamically
+                                                                    $recent_update = '-';
+                                                                    $register_count = '-';
+
+                                                                    foreach ($targets as $name) {
+                                                                        if (isset($row['url']) && strpos($row['url'], $name) !== false) {
+                                                                            $recent_update_date = $row["recent_update_$name"] ?? null;
+                                                                            $recent_update = htmlspecialchars($recent_update_date ?? '-');
+                                                            
+                                                                            // Check if recent_update is today
+                                                                            if ($recent_update_date && date('Y-m-d', strtotime($recent_update_date)) === date('Y-m-d')) {
+                                                                                $recent_update = "<td style='background: #4eb24e; color:white; font-weight: bold;'>$recent_update</td>";
+                                                                            } else {
+                                                                                $recent_update = "<td>$recent_update</td>";
+                                                                            }
+                                                            
+                                                                            $register_count = htmlspecialchars($row["register_count_$name"] ?? '-');
+                                                                            break;
+                                                                        }
                                                                     }
 
-                                                                    if (isset($row["url"]) && strpos($row["url"], "target") !== false) {
-                                                                        // If the 'url' contains "target", show the 'recent_update_target' column
-                                                                        echo "<td>" . htmlspecialchars($row["register_count_target"] ?? '-') . "</td>";
-                                                                    }elseif(isset($row["url"]) && strpos($row["url"], "arena") !== false) {
-                                                                        echo "<td>" . htmlspecialchars($row["register_count_arena"] ?? '-') . "</td>";
-                                                                    }elseif(isset($row["url"]) && strpos($row["url"], "ayo") !== false) {
-                                                                        echo "<td>" . htmlspecialchars($row["register_count_ayo"] ?? '-') . "</td>";
-                                                                    }
-
+                                                                    echo "$recent_update";
+                                                                    echo "<td>$register_count</td>";
                                                                     echo "<td>-</td>"; // Additional static column
                                                                     echo "</tr>";
                                                                 }
@@ -208,6 +215,7 @@ if (!isset($_SESSION['valid'])) {
                                                         </tbody>
                                                     </table>
                                                 </div>
+                                                <div id="pagination-container" class="light-theme mt-4 d-flex justify-content-end"></div>
 
                                             </div>
                                         </div>
@@ -273,6 +281,34 @@ if (!isset($_SESSION['valid'])) {
         </div>
     </div>
     </main>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="./flaviusmatis-simplePagination.js-da97104/jquery.simplePagination.js"></script>
+    <script>
+
+            var items = $(".list-item");
+            var numItems = items.length;
+            var perPage = 10;
+
+            items.slice(perPage).hide();
+
+            $(document).ready(function () {
+
+
+                $('#pagination-container').pagination({
+                    items: numItems,
+                    itemsOnPage: perPage,
+                    prevText: "&laquo;",
+                    nextText: "&raquo;",
+                    onPageClick: function (pageNumber) {
+                        var showFrom = perPage * (pageNumber - 1);
+                        var showTo = showFrom + perPage;
+                        items.hide().slice(showFrom, showTo).show();
+                    }
+                });
+            });
+
+
+    </script>
 </body>
 
 </html>
