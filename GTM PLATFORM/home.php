@@ -55,7 +55,7 @@ if (!isset($_SESSION['valid'])) {
                                 <li class="el-menu-item menu-item load-content is-active">
                                     <div class="menu-item-content d-flex align-items-center">
                                         <i class="fa-solid fa-house-chimney"></i>
-                                        <span class="text-capitalize ml-3">Home</span>
+                                        <span class="text-capitalize ml-3">All Brand</span>
                                     </div>
                                 </li>
                                 <div class="d-flex align-items-center">
@@ -131,8 +131,8 @@ if (!isset($_SESSION['valid'])) {
                                                 </form>
                                             </div>
                                             <div class="el-table-fit el-table">
-                                                <div class="table-responsive">
-                                                    <table class="table table-striped table-bordered">
+                                                <div class="table-responsive"> 
+                                                     <table class="table table-striped table-bordered">
                                                         <thead class="thead-dark">
                                                             <tr>
                                                                 <th style="min-width: 100px;">Country</th>
@@ -149,7 +149,7 @@ if (!isset($_SESSION['valid'])) {
                                                         <tbody>
                                                         <?php
                                                             $targets = ['target', 'arena', 'ayo', 'tajir', 'pg', 'alitoto', 'plustogel', 'platinumslot', 'maxtoto',
-                                                                        'puma99', 'megafafa', 'auroratoto', 'garuda'];
+                                                                        'puma99', 'megafafa', 'auroratoto', 'garuda','bomjudi'];
                                                             $subqueries = [];
 
                                                             // Generate subqueries dynamically

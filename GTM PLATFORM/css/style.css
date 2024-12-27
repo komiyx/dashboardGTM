@@ -432,8 +432,8 @@ body {
   padding: 2px;
 }
 .el-button-reset {
-  background-color: #fff !important;
-  color: black !important;
+  background-color: #ff0000 !important;
+  color: #ffffff !important;
   border: 1px solid #dcdfe6 !important;
 }
 

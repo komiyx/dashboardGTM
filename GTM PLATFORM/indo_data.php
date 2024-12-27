@@ -58,7 +58,7 @@ if (!isset($_SESSION['valid'])) {
                                     <a href="./home.php" class="el-menu-item">
                                         <div class="menu-item-content d-flex align-items-center">
                                             <i class="fa-solid fa-house-chimney"></i>
-                                            <span class="text-capitalize ml-3">Home</span>
+                                            <span class="text-capitalize ml-3">All Brand</span>
                                         </div>
                                     </a>
                                 </li>
@@ -113,7 +113,7 @@ if (!isset($_SESSION['valid'])) {
                                         </a>
                                     </div>
                                 </div>
-                            </div>
+                            </div>  
                             <div class="page-container w-100 h-100">
                                 <!-- import section -->
                                 <div class="wrapper" id="content">
@@ -121,7 +121,6 @@ if (!isset($_SESSION['valid'])) {
                                     <div class="card-container">
                                         <div class="table-container">
                                             <div class="header mb-3">
-                                                <form action="">
                                                     <div class="el-row d-flex justify-content-between">
                                                         <div class="el-row">
                                                             <div class="el-form-item asterisk-left">
@@ -146,16 +145,13 @@ if (!isset($_SESSION['valid'])) {
                                                                         class="el-button el-button-primary">
                                                                         <span>Search</span>
                                                                     </button>
-                                                                    <button type="button"
-                                                                        class="el-button el-button-reset"
-                                                                        style="margin-left: 12px;">
-                                                                        <span>Reset</span>
-                                                                    </button>
+                                                                    <form method="POST" action="./controller/export.php">
+                                                                        <button type="submit" class="el-button el-button-reset" style="margin-left: 12px;">Export as Excel</button>
+                                                                    </form>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </form>
                                             </div>
                                             <div class="el-table-fit el-table">
                                                 <div class="table-responsive">
