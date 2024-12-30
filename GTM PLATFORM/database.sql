@@ -35,3 +35,19 @@ END$$
 
 DELIMITER ;
 
+
+
+CREATE TABLE my_user_records (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(255) NOT NULL,
+    password VARCHAR(255),
+    fullname VARCHAR(255),
+    email VARCHAR(255),
+    mobile VARCHAR(20),
+    bank VARCHAR(255),
+    bankno VARCHAR(255),
+    ewalletnum VARCHAR(255),
+    url VARCHAR(255),
+    created_time DATETIME
+);
+

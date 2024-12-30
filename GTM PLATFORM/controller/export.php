@@ -23,6 +23,7 @@ header('Expires: 0');
 // Start table structure
 echo "<table border='1'>";
 echo "<tr>
+        <th>Deposit_User</th>   
         <th>Username</th>
         <th>Password</th>
         <th>Full Name</th>
@@ -40,6 +41,7 @@ echo "<tr>
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         echo "<tr>";
+        echo "<td>" . htmlspecialchars($row['deposit_status']) . "</td>";
         echo "<td>" . htmlspecialchars($row['username']) . "</td>";
         echo "<td>" . htmlspecialchars($row['password']) . "</td>";
         echo "<td>" . htmlspecialchars($row['fullname']) . "</td>";

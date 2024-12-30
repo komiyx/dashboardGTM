@@ -81,6 +81,30 @@ if (!isset($_SESSION['valid'])) {
                                         </div>
                                     </a>
                                 </li>
+                                <li class="el-menu-item menu-item load-content">
+                                    <a href="./my_data.php" class="el-menu-item">
+                                        <div class="menu-item-content d-flex align-items-center">
+                                            <i class="fa-brands fa-app-store"></i>
+                                            <span class="text-capitalize ml-3">MY DATA</span>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="el-menu-item menu-item load-content">
+                                    <a href="./th_data.php" class="el-menu-item">
+                                        <div class="menu-item-content d-flex align-items-center">
+                                            <i class="fa-brands fa-app-store"></i>
+                                            <span class="text-capitalize ml-3">TH DATA</span>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="el-menu-item menu-item load-content">
+                                    <a href="./bdt_data.php" class="el-menu-item">
+                                        <div class="menu-item-content d-flex align-items-center">
+                                            <i class="fa-brands fa-app-store"></i>
+                                            <span class="text-capitalize ml-3">BDT DATA</span>
+                                        </div>
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                     </div>
