@@ -17,3 +17,21 @@ CREATE TABLE gtmrecord (
     deposit VARCHAR(200),
     installdate VARCHAR(10)
 );
+
+ALTER TABLE indo_user_records ADD COLUMN deposit_status VARCHAR(3) DEFAULT '-';
+
+
+DELIMITER $$
+
+CREATE TRIGGER after_indo_dep_user_records_insert
+AFTER INSERT ON indo_dep_user_records
+FOR EACH ROW
+BEGIN
+    -- Check if the username in indo_user_records matches the newly inserted username
+    UPDATE indo_user_records
+    SET deposit_status = 'YES'
+    WHERE username = NEW.username;
+END$$
+
+DELIMITER ;
+

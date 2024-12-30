@@ -144,6 +144,7 @@ if (!isset($_SESSION['valid'])) {
                                                     <table class="table table-striped table-bordered">
                                                         <thead class="thead-dark">
                                                             <tr>
+                                                                <th style="min-width: 100px;">Deposit User</th>
                                                                 <th style="min-width: 100px;">Username</th>
                                                                 <th style="min-width: 130px;">Passowrd</th>
                                                                 <th>FullName</th>
@@ -160,7 +161,10 @@ if (!isset($_SESSION['valid'])) {
                                                         <tbody>
                                                             <?php
 
-                                                                $query = "SELECT username, password, fullname, email, mobile, bank_emoney_selected, bank_emoney, bank_emoney_name, bank_no_emoney_no, url, created_time FROM indo_user_records ORDER BY created_time DESC";
+                                                                $query = "SELECT username, password, fullname, email, deposit_status, mobile, bank_emoney_selected, bank_emoney, bank_emoney_name, bank_no_emoney_no, url, created_time 
+                                                                        FROM indo_user_records 
+                                                                        ORDER BY deposit_status DESC, created_time DESC";
+
                                                                 $result = $conn->query($query);
                                                                 
                                                                 // Check if there are results
@@ -168,6 +172,7 @@ if (!isset($_SESSION['valid'])) {
                                                                     // Loop through the results and output rows
                                                                     while ($row = $result->fetch_assoc()) {
                                                                         echo "<tr class='list-item'>";
+                                                                        echo "<td>" . htmlspecialchars($row['deposit_status']) . "</td>";
                                                                         echo "<td>" . htmlspecialchars($row['username']) . "</td>";
                                                                         echo "<td>" . htmlspecialchars($row['password']) . "</td>";
                                                                         echo "<td>" . htmlspecialchars($row['fullname']) . "</td>";
