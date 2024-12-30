@@ -35,6 +35,20 @@ END$$
 
 DELIMITER ;
 
+DELIMITER $$
+
+CREATE TRIGGER after_my_user_dep_records_insert
+AFTER INSERT ON my_user_dep_records
+FOR EACH ROW
+BEGIN
+    -- Check if the username in my_user_records matches the newly inserted username
+    UPDATE my_user_records
+    SET deposit_status = 'YES'
+    WHERE username = NEW.username;
+END$$
+
+DELIMITER ;
+
 
 
 CREATE TABLE my_user_records (
@@ -51,3 +65,11 @@ CREATE TABLE my_user_records (
     created_time DATETIME
 );
 
+
+
+CREATE TABLE my_user_dep_records (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(255) NOT NULL UNIQUE,
+    url VARCHAR(255) NOT NULL,
+    last_created_time DATETIME NOT NULL
+);

@@ -187,7 +187,7 @@ if (!isset($_SESSION['valid'])) {
 
                                                                 $query = "SELECT username, password, fullname, email, deposit_status, mobile, bank_emoney_selected, bank_emoney, bank_emoney_name, bank_no_emoney_no, url, created_time 
                                                                         FROM indo_user_records 
-                                                                        ORDER BY deposit_status DESC, created_time DESC";
+                                                                        ORDER BY deposit_status DESC, created_time DESC LIMIT 20000";
 
                                                                 $result = $conn->query($query);
                                                                 

@@ -15,7 +15,7 @@ if (!isset($_SESSION['valid'])) {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <title>GTMBest - INDO Data</title>
+    <title>GTMBest - MY Data</title>
     <link rel="icon" type="image/png" href="img/aside-logo.png">
     <link type="text/css" rel="stylesheet" href="./flaviusmatis-simplePagination.js-da97104/simplePagination.css"/>
     <link rel="preload" as="style" onload="this.onload=null; this.rel='stylesheet'" href="./css/style.css">
@@ -174,10 +174,9 @@ if (!isset($_SESSION['valid'])) {
                                                                 <th>FullName</th>
                                                                 <th>Email</th>
                                                                 <th>Mobile</th>
-                                                                <th>Bank / Emoney Selected</th>
-                                                                <th>Bank / Emoney </th>
-                                                                <th>Bank / Emoney Name</th>
-                                                                <th>BankNo / EmoneyNo</th>
+                                                                <th>bank</th>
+                                                                <th>bankno</th>
+                                                                <th>ewalletnum</th>
                                                                 <th>URL</th>
                                                                 <th>Created Time</th>
                                                             </tr>
@@ -202,10 +201,9 @@ if (!isset($_SESSION['valid'])) {
                                                                         echo "<td>" . htmlspecialchars($row['fullname']) . "</td>";
                                                                         echo "<td>" . htmlspecialchars($row['email']) . "</td>";
                                                                         echo "<td>" . htmlspecialchars($row['mobile']) . "</td>";
-                                                                        echo "<td>" . htmlspecialchars($row['bank_emoney_selected']) . "</td>";
-                                                                        echo "<td>" . htmlspecialchars($row['bank_emoney']) . "</td>";
-                                                                        echo "<td>" . htmlspecialchars($row['bank_emoney_name']) . "</td>";
-                                                                        echo "<td>" . htmlspecialchars($row['bank_no_emoney_no']) . "</td>";
+                                                                        echo "<td>" . htmlspecialchars($row['bank']) . "</td>";
+                                                                        echo "<td>" . htmlspecialchars($row['bankno']) . "</td>";
+                                                                        echo "<td>" . htmlspecialchars($row['ewalletnum']) . "</td>";
                                                                         echo "<td>" . htmlspecialchars($row['url']) . "</td>";
                                                                         echo "<td>" . htmlspecialchars($row['created_time']) . "</td>";
                                                                         echo "</tr>";

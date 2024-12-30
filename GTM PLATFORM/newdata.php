@@ -171,8 +171,8 @@ if (!isset($_SESSION['valid'])) {
                                                         <tbody>
                                                         <?php
                                                             $targets = ['target', 'arena', 'ayo', 'tajir', 'pg', 'alitoto', 'plustogel', 'platinumslot', 'maxtoto',
-                                                                        'puma99', 'megafafa', 'auroratoto', 'garuda','bomjudi','asiagam1ng','ponsel','sgaresmi','bucin',
-                                                                        'resmi'];
+                                                            'puma99', 'megafafa', 'auroratoto', 'garuda','bomjudi','asiagam1ng','ponsel','sgaresmi','bucin',
+                                                            'resmi','ant','eezy','uea8'];
                                                             $subqueries = [];
 
                                                             // Generate subqueries dynamically
