@@ -14,8 +14,7 @@ if (!isset($_SESSION['valid'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <title>GTMBest - INDO Data</title>
-    <link rel="icon" href="/img/icon.webp">
-    <link rel="icon" href="/img/aside-logo.png">
+    <link rel="icon" type="image/png" href="img/aside-logo.png">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <link type="text/css" rel="stylesheet" href="./flaviusmatis-simplePagination.js-da97104/simplePagination.css"/>
     <link rel="preload" as="style" onload="this.onload=null; this.rel='stylesheet'" href="./css/style.css">
@@ -144,12 +143,13 @@ if (!isset($_SESSION['valid'])) {
                                                                 <th>Recent Data Update</th>
                                                                 <th>Register Data Collected</th>
                                                                 <th>Deposit Data Collected</th>
+                                                                <th>Edit</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
                                                         <?php
                                                             $targets = ['target', 'arena', 'ayo', 'tajir', 'pg', 'alitoto', 'plustogel', 'platinumslot', 'maxtoto',
-                                                                        'puma99', 'megafafa', 'auroratoto', 'garuda','bomjudi'];
+                                                                        'puma99', 'megafafa', 'auroratoto', 'garuda','bomjudi','asiagam1ng','ponsel'];
                                                             $subqueries = [];
 
                                                             // Generate subqueries dynamically
@@ -203,7 +203,16 @@ if (!isset($_SESSION['valid'])) {
 
                                                                     echo "$recent_update";
                                                                     echo "<td>$register_count</td>";
-                                                                    echo "<td>-</td>"; // Additional static column
+                                                                    echo "<td>-</td>";
+                                            
+                                                                    // Add Edit button
+                                                                    echo "<td>"
+                                                                    . "<form method='GET' action='./controller/edit.php' style='display:inline;'>"
+                                                                    . "<input type='hidden' name='id' value='" . htmlspecialchars($row['id']) . "'>"
+                                                                    . "<button type='submit' class='btn btn-warning btn-sm'>Edit</button>"
+                                                                    . "</form>"
+                                                                    . "</td>";
+
                                                                     echo "</tr>";
                                                                 }
                                                             } else {

@@ -16,9 +16,7 @@ if (!isset($_SESSION['valid'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <title>GTMBest - INDO Data</title>
-    <link rel="icon" href="/img/icon.webp">
-    <link rel="icon" href="/img/aside-logo.png">
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="img/aside-logo.png">
     <link type="text/css" rel="stylesheet" href="./flaviusmatis-simplePagination.js-da97104/simplePagination.css"/>
     <link rel="preload" as="style" onload="this.onload=null; this.rel='stylesheet'" href="./css/style.css">
     <link rel="preload" as="style" onload="this.onload=null; this.rel='stylesheet'" href="./css/home.css">
@@ -125,26 +123,6 @@ if (!isset($_SESSION['valid'])) {
                                                         <div class="el-row">
                                                             <div class="el-form-item asterisk-left">
                                                                 <div class="el-form-item-content">
-                                                                    <div class="el-input-wrapper">
-                                                                        <span class="el-input-prefix">
-                                                                            <span class="el-input-prefix-inner">
-                                                                                <i
-                                                                                    class="fa-solid fa-magnifying-glass mr-3"></i>
-                                                                            </span>
-                                                                        </span>
-                                                                        <input type="text" class="el-input-inner"
-                                                                            autocomplete="off"
-                                                                            placeholder="Please search for the name"
-                                                                            id="search-pwa">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="el-form-item asterisk-left">
-                                                                <div class="el-form-item-content">
-                                                                    <button type="button"
-                                                                        class="el-button el-button-primary">
-                                                                        <span>Search</span>
-                                                                    </button>
                                                                     <form method="POST" action="./controller/export.php">
                                                                         <button type="submit" class="el-button el-button-reset" style="margin-left: 12px;">Export as Excel</button>
                                                                     </form>
