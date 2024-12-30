@@ -144,4 +144,9 @@
 
 .image-upload-container:hover .delete-icon {
   display: block;
+}
+
+.table-container .title {
+  color: rgb(0, 144, 65);
+  font-weight: 700;
 }/*# sourceMappingURL=home.css.map */

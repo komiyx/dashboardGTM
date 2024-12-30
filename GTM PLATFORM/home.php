@@ -13,7 +13,7 @@ if (!isset($_SESSION['valid'])) {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <title>GTMBest - INDO Data</title>
+    <title>GTMBest - HOME</title>
     <link rel="icon" type="image/png" href="img/aside-logo.png">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <link type="text/css" rel="stylesheet" href="./flaviusmatis-simplePagination.js-da97104/simplePagination.css"/>
@@ -56,6 +56,14 @@ if (!isset($_SESSION['valid'])) {
                                         <i class="fa-solid fa-house-chimney"></i>
                                         <span class="text-capitalize ml-3">All Brand</span>
                                     </div>
+                                </li>
+                                <li class="el-menu-item menu-item load-content">
+                                    <a href="./newdata.php" class="el-menu-item">
+                                        <div class="menu-item-content d-flex align-items-center">
+                                            <i class="fa-solid fa-circle-plus"></i>
+                                            <span class="text-capitalize ml-3">New Add</span>
+                                        </div>
+                                    </a>
                                 </li>
                                 <div class="d-flex align-items-center">
                                     <div class="menu-item-title ">

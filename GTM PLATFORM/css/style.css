@@ -311,6 +311,9 @@ body {
 .page-container .card-container .table-container .el-table tr {
   background-color: #fff;
 }
+.page-container .card-container .table-container .el-table .new-add {
+  background-color: #d0ffd2 !important;
+}
 .page-container .card-container .table-container .el-table th.el-table-cell {
   background-color: #f7f7fb;
 }
@@ -432,8 +435,8 @@ body {
   padding: 2px;
 }
 .el-button-reset {
-  background-color: #ff0000 !important;
-  color: #ffffff !important;
+  background-color: #fff !important;
+  color: black !important;
   border: 1px solid #dcdfe6 !important;
 }
 
