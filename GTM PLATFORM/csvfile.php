@@ -9,7 +9,7 @@
 <body>
     <div class="container mt-5">
         <h2>Import CSV File</h2>
-        <form method="POST" action="./controller/csv_dep.php" enctype="multipart/form-data">
+        <form method="POST" action="./controller/csv.php" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="csv_file">Upload CSV File</label>
                 <input type="file" class="form-control" id="csv_file" name="csv_file" accept=".csv" required>

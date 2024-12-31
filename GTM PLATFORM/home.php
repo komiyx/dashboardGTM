@@ -174,32 +174,55 @@ if (!isset($_SESSION['valid'])) {
                                                                 <th>Deposit</th>
                                                                 <th>Recent Data Update</th>
                                                                 <th>Register Data Collected</th>
-                                                                <th>Deposit Data Collected</th>
                                                                 <th>Edit</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
                                                         <?php
-                                                            $targets = ['target', 'arena', 'ayo', 'tajir', 'pg', 'alitoto', 'plustogel', 'platinumslot', 'maxtoto',
-                                                                'puma99', 'megafafa', 'auroratoto', 'garuda','bomjudi','asiagam1ng','ponsel','sgaresmi','bucin',
-                                                                'resmi','ant','eezy','uea8'];
+                                                            // Define targets for each country
+                                                            $countryTargets = [
+                                                                'MY' => ['ant','eezy','uea8'],
+                                                                'INDO' => ['target', 'arena', 'ayo', 'tajir', 'pg', 'alitoto', 'plustogel', 'platinumslot', 'maxtoto',
+                                                            'puma99', 'megafafa', 'auroratoto', 'garuda','bomjudi','asiagam1ng','ponsel','sgaresmi','bucin',
+                                                            'resmi','detogoat'],
+                                                                'BDT' => ['mcw','bigtaka','bhaggo','jitaace',],
+                                                                'TH' => ['ddmm'],
+                                                            ];
+
+                                                            // Map countries to respective tables
+                                                            $countryTableMap = [
+                                                                'MY' => 'my_user_records',
+                                                                'INDO' => 'indo_user_records',
+                                                                'BDT' => 'bdt_user_records',
+                                                                'TH' => 'th_user_records',
+                                                            ];
+
                                                             $subqueries = [];
 
-                                                            // Generate subqueries dynamically
-                                                            foreach ($targets as $name) {
-                                                                $subqueries[] = "(SELECT COUNT(*) 
-                                                                                    FROM indo_user_records 
-                                                                                    WHERE indo_user_records.url LIKE CONCAT('%', '$name', '%')
-                                                                                ) AS register_count_$name";
-                                                                $subqueries[] = "(SELECT created_time
-                                                                                    FROM indo_user_records
-                                                                                    WHERE indo_user_records.url LIKE CONCAT('%', '$name', '%')
-                                                                                    ORDER BY created_time DESC
-                                                                                    LIMIT 1
-                                                                                ) AS recent_update_$name";
+                                                            // Generate subqueries dynamically based on country-specific targets
+                                                            foreach ($countryTargets as $countryCode => $targets) {
+                                                                if (isset($countryTableMap[$countryCode])) {
+                                                                    $tableName = $countryTableMap[$countryCode];
+                                                                    foreach ($targets as $name) {
+                                                                        $subqueries[] = "(SELECT COUNT(*) 
+                                                                                            FROM $tableName 
+                                                                                            WHERE $tableName.url LIKE CONCAT('%', '$name', '%')
+                                                                                        ) AS register_count_{$name}_{$countryCode}";
+                                                                        $subqueries[] = "(SELECT created_time
+                                                                                            FROM $tableName
+                                                                                            WHERE $tableName.url LIKE CONCAT('%', '$name', '%')
+                                                                                            ORDER BY created_time DESC
+                                                                                            LIMIT 1
+                                                                                        ) AS recent_update_{$name}_{$countryCode}";
+                                                                    }
+                                                                }
                                                             }
 
+                                                            $today = date('d/m/Y');
+
+                                                            // SQL query to fetch records for the current week
                                                             $query = "SELECT gtmrecord.*, " . implode(", ", $subqueries) . " FROM gtmrecord ORDER BY installdate DESC";
+
                                                             $result = $conn->query($query);
 
                                                             // Check if there are results
@@ -213,31 +236,32 @@ if (!isset($_SESSION['valid'])) {
                                                                     echo "<td>" . htmlspecialchars($row['register']) . "</td>";
                                                                     echo "<td>" . htmlspecialchars($row['deposit']) . "</td>";
 
-                                                                    // Determine recent_update and register_count dynamically
                                                                     $recent_update = '-';
                                                                     $register_count = '-';
 
-                                                                    foreach ($targets as $name) {
-                                                                        if (isset($row['url']) && strpos($row['url'], $name) !== false) {
-                                                                            $recent_update_date = $row["recent_update_$name"] ?? null;
-                                                                            $recent_update = htmlspecialchars($recent_update_date ?? '-');
-                                                            
-                                                                            // Check if recent_update is today
-                                                                            if ($recent_update_date && date('Y-m-d', strtotime($recent_update_date)) === date('Y-m-d')) {
-                                                                                $recent_update = "<td style='background: #4eb24e; color:white; font-weight: bold;'>$recent_update</td>";
-                                                                            } else {
-                                                                                $recent_update = "<td>$recent_update</td>";
+                                                                    $countryCode = $row['country']; // Determine which country the row belongs to
+                                                                    if (isset($countryTargets[$countryCode])) {
+                                                                        $targets = $countryTargets[$countryCode];
+                                                                        foreach ($targets as $name) {
+                                                                            if (isset($row['url']) && strpos($row['url'], $name) !== false) {
+                                                                                $recent_update_date = $row["recent_update_{$name}_{$countryCode}"] ?? null;
+                                                                                $recent_update = htmlspecialchars($recent_update_date ?? '-');
+
+                                                                                // Check if recent_update is today
+                                                                                if ($recent_update_date && date('Y-m-d', strtotime($recent_update_date)) === date('Y-m-d')) {
+                                                                                    $recent_update = "<td style='background: #4eb24e; color:white; font-weight: bold;'>$recent_update</td>";
+                                                                                } else {
+                                                                                    $recent_update = "<td>$recent_update</td>";
+                                                                                }
+
+                                                                                $register_count = htmlspecialchars($row["register_count_{$name}_{$countryCode}"] ?? '-');
+                                                                                break;
                                                                             }
-                                                            
-                                                                            $register_count = htmlspecialchars($row["register_count_$name"] ?? '-');
-                                                                            break;
                                                                         }
                                                                     }
 
                                                                     echo "$recent_update";
                                                                     echo "<td>$register_count</td>";
-                                                                    echo "<td>-</td>";
-                                            
                                                                     // Add Edit button
                                                                     echo "<td>"
                                                                     . "<form method='GET' action='./controller/edit.php' style='display:inline;'>"
@@ -252,7 +276,7 @@ if (!isset($_SESSION['valid'])) {
                                                                 // If no data is found
                                                                 echo "<tr><td colspan='11' class='text-center'>No records found.</td></tr>";
                                                             }
-                                                        ?>
+                                                            ?>
 
                                                         </tbody>
                                                     </table>

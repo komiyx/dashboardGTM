@@ -186,7 +186,7 @@ if (!isset($_SESSION['valid'])) {
 
                                                                 $query = "SELECT *
                                                                         FROM my_user_records 
-                                                                        ORDER BY deposit_status DESC, created_time DESC";
+                                                                        ORDER BY deposit_status DESC, created_time DESC LIMIT 20000";
 
                                                                 $result = $conn->query($query);
                                                                 
