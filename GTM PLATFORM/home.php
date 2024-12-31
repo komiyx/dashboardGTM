@@ -184,7 +184,7 @@ if (!isset($_SESSION['valid'])) {
                                                                 'MY' => ['ant','eezy','uea8'],
                                                                 'INDO' => ['target', 'arena', 'ayo', 'tajir', 'pg', 'alitoto', 'plustogel', 'platinumslot', 'maxtoto',
                                                             'puma99', 'megafafa', 'auroratoto', 'garuda','bomjudi','asiagam1ng','ponsel','sgaresmi','bucin',
-                                                            'resmi','detogoat'],
+                                                            'resmi','detogoat','ligadewa'],
                                                                 'BDT' => ['mcw','bigtaka','bhaggo','jitaace',],
                                                                 'TH' => ['ddmm'],
                                                             ];
@@ -229,7 +229,18 @@ if (!isset($_SESSION['valid'])) {
                                                             if ($result && $result->num_rows > 0) {
                                                                 while ($row = $result->fetch_assoc()) {
                                                                     echo "<tr class='list-item'>";
-                                                                    echo "<td>" . htmlspecialchars($row['country']) . "</td>";
+                                                                    echo "<td style='background: " . 
+                                                                    ($row['country'] === 'INDO' 
+                                                                        ? '#edd5d5' 
+                                                                        : ($row['country'] === 'BDT' 
+                                                                            ? '#daff93' 
+                                                                            : ($row['country'] === 'MY' 
+                                                                                ? '#93ffe2' 
+                                                                                : ($row['country'] === 'TH' 
+                                                                                    ? '#ffc1e3' 
+                                                                                    : 'transparent')))) . ";'>" . 
+                                                                    htmlspecialchars($row['country']) . 
+                                                                    "</td>";
                                                                     echo "<td>" . htmlspecialchars($row['brandname']) . "</td>";
                                                                     echo "<td>" . htmlspecialchars($row['url']) . "</td>";
                                                                     echo "<td>" . htmlspecialchars($row['installdate']) . "</td>";

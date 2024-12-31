@@ -4,7 +4,7 @@ include("../../auth/connect.php");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Capture form data
-    $username = isset($_POST['username']) ? $_POST['username'] : '-';
+    $username = isset($_POST['username']) && !empty(trim($_POST['username'])) ? $_POST['username'] : null;
     $fname = isset($_POST['fname']) ? $_POST['fname'] : '-';
     $password = isset($_POST['password']) ? $_POST['password'] : '-';
     $email = isset($_POST['email']) ? $_POST['email'] : '-';
@@ -16,7 +16,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $url = isset($_POST['url']) ? $_POST['url'] : '-';
 
     // Sanitize inputs
-    $username = htmlspecialchars($username);
     $fname = htmlspecialchars($fname);
     $password = htmlspecialchars($password);
     $email = htmlspecialchars($email);
@@ -26,6 +25,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $bankno = htmlspecialchars($bankno);
     $bankname = htmlspecialchars($bankname);
     $url = htmlspecialchars($url);
+
+    // Ensure username is defined and not empty
+    if ($username === null) {
+        error_log("Username is undefined or empty. Skipping insertion.");
+        exit;
+    }
+
+    $username = htmlspecialchars($username);
 
     // Ensure mobile number starts with '0'
     if ($mobile !== '-' && strpos($mobile, '0') !== 0) {
