@@ -119,7 +119,7 @@ if (!isset($_SESSION['valid'])) {
                                 <div class="placeholder"></div>
                                 <div class="header d-flex justify-content-between align-items-center">
                                     <div class="title-top-nav text-uppercase">
-                                        Indo Data
+                                        MY Data
                                     </div>
                                     <div class="d-flex items-ceter pr-5">
                                         <div class="d-flex items-center mr-5">
@@ -155,9 +155,9 @@ if (!isset($_SESSION['valid'])) {
                                                         <div class="el-row">
                                                             <div class="el-form-item asterisk-left">
                                                                 <div class="el-form-item-content">
-                                                                    <form method="POST" action="./controller/export_my.php">
-                                                                        <button type="submit" class="el-button el-button-reset" style="margin-left: 12px;">Export as Excel</button>
-                                                                    </form>
+                                                                    <button type="button" class="btn btn-primary" style="margin-left: 12px;" data-toggle="modal" data-target="#exportModal">
+                                                                        Export as Excel
+                                                                    </button>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -228,6 +228,45 @@ if (!isset($_SESSION['valid'])) {
             </div>
         </div>
     </main>
+    <div class="modal fade" id="exportModal" tabindex="-1" role="dialog" aria-labelledby="exportModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exportModalLabel">Export by Filters</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form method="POST" action="./controller/export_my.php">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="start_date">Start Date:</label>
+                            <input type="date" class="form-control" id="start_date" name="start_date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="end_date">End Date:</label>
+                            <input type="date" class="form-control" id="end_date" name="end_date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="limit">Number of Data:</label>
+                            <select class="form-control" id="limit" name="limit" required>
+                                <option value="all">All Records</option>
+                                <option value="100">100</option>
+                                <option value="500">500</option>
+                                <option value="1000">1000</option>
+                                <option value="5000">5000</option>
+                                <option value="10000">10000</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Export</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="./flaviusmatis-simplePagination.js-da97104/jquery.simplePagination.js"></script>
     <script>
