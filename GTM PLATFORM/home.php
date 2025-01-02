@@ -187,6 +187,7 @@ if (!isset($_SESSION['valid'])) {
                                                             'resmi','detogoat','ligadewa'],
                                                                 'BDT' => ['mcw','bigtaka','bhaggo','jitaace',],
                                                                 'TH' => ['ddmm'],
+                                                                'AUD' => ['pp99'],
                                                             ];
 
                                                             // Map countries to respective tables
@@ -195,6 +196,7 @@ if (!isset($_SESSION['valid'])) {
                                                                 'INDO' => 'indo_user_records',
                                                                 'BDT' => 'bdt_user_records',
                                                                 'TH' => 'th_user_records',
+                                                                'AUD' => 'aud_user_records',
                                                             ];
 
                                                             $subqueries = [];
@@ -238,7 +240,9 @@ if (!isset($_SESSION['valid'])) {
                                                                                 ? '#93ffe2' 
                                                                                 : ($row['country'] === 'TH' 
                                                                                     ? '#ffc1e3' 
-                                                                                    : 'transparent')))) . ";'>" . 
+                                                                                    : ($row['country'] ==='AUD' 
+                                                                                    ? '#ff712b' 
+                                                                                    : 'transparent'))))) . ";'>" . 
                                                                     htmlspecialchars($row['country']) . 
                                                                     "</td>";
                                                                     echo "<td>" . htmlspecialchars($row['brandname']) . "</td>";
