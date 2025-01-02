@@ -10,6 +10,18 @@
     <link rel="stylesheet" href="./css/login.css">
     <link rel="icon" type="image/png" href="img/aside-logo.png">
     <title>Login</title>
+        <style>
+        .toggle-password {
+            position: absolute;
+            right: 10px;
+            top: 66%;
+            transform: translateY(-50%);
+            cursor: pointer;
+        }
+        .field {
+            position: relative;
+        }
+    </style>
 </head>
 <body>
       <div class="container">
@@ -42,6 +54,11 @@
 
             
             ?>
+            <div class="col-12">
+                <div class="message" style="font-size: 25px; font-weight: bold;">
+                    <p>GTM DATA</p>
+                </div>
+            </div>
             <header>Login</header>
             <form action="" method="post">
                 <div class="field input">
@@ -52,6 +69,7 @@
                 <div class="field input">
                     <label for="password">Password</label>
                     <input type="password" name="password" id="password" autocomplete="off" required>
+                    <span class="toggle-password" onclick="togglePassword()">👁</span>
                 </div>
 
                 <div class="field">
@@ -62,5 +80,18 @@
         </div>
         <?php } ?>
       </div>
+      <script>
+        function togglePassword() {
+            const passwordField = document.getElementById('password');
+            const toggleIcon = document.querySelector('.toggle-password');
+            if (passwordField.type === 'password') {
+                passwordField.type = 'text';
+                toggleIcon.textContent = '👁‍🗨'; // Change icon to indicate password is visible
+            } else {
+                passwordField.type = 'password';
+                toggleIcon.textContent = '👁'; // Change icon to indicate password is hidden
+            }
+        }
+    </script>
 </body>
 </html>

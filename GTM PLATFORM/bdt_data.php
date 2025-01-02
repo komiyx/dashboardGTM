@@ -89,7 +89,7 @@ if (!isset($_SESSION['valid'])) {
                                         </div>
                                     </a>
                                 </li>
-                                <li class="el-menu-item menu-item load-content">
+                                <li class="el-menu-item menu-item load-content ">
                                     <a href="./th_data.php" class="el-menu-item">
                                         <div class="menu-item-content d-flex align-items-center">
                                             <i class="fa-brands fa-app-store"></i>
@@ -97,7 +97,7 @@ if (!isset($_SESSION['valid'])) {
                                         </div>
                                     </a>
                                 </li>
-                                <li class="el-menu-item menu-item load-content  is-active">
+                                <li class="el-menu-item menu-item load-content is-active">
                                     <a href="./bdt_data.php" class="el-menu-item">
                                         <div class="menu-item-content d-flex align-items-center">
                                             <i class="fa-brands fa-app-store"></i>
@@ -174,9 +174,10 @@ if (!isset($_SESSION['valid'])) {
                                                                 <th>FullName</th>
                                                                 <th>Email</th>
                                                                 <th>Mobile</th>
-                                                                <th>bank</th>
-                                                                <th>bankno</th>
-                                                                <th>ewalletnum</th>
+                                                                <th>Bank / Emoney Selected</th>
+                                                                <th>Bank / Emoney </th>
+                                                                <th>Bank / Emoney Name</th>
+                                                                <th>BankNo / EmoneyNo</th>
                                                                 <th>URL</th>
                                                                 <th>Created Time</th>
                                                             </tr>
@@ -184,7 +185,7 @@ if (!isset($_SESSION['valid'])) {
                                                         <tbody>
                                                             <?php
 
-                                                                $query = "SELECT *
+                                                                $query = "SELECT username, password, fullname, email, deposit_status, mobile, bank_emoney_selected, bank_emoney, bank_emoney_name, bank_no_emoney_no, url, created_time 
                                                                         FROM bdt_user_records 
                                                                         ORDER BY deposit_status DESC, created_time DESC LIMIT 10000";
 
@@ -201,9 +202,10 @@ if (!isset($_SESSION['valid'])) {
                                                                         echo "<td>" . htmlspecialchars($row['fullname']) . "</td>";
                                                                         echo "<td>" . htmlspecialchars($row['email']) . "</td>";
                                                                         echo "<td>" . htmlspecialchars($row['mobile']) . "</td>";
-                                                                        echo "<td>" . htmlspecialchars($row['bank']) . "</td>";
-                                                                        echo "<td>" . htmlspecialchars($row['bankno']) . "</td>";
-                                                                        echo "<td>" . htmlspecialchars($row['ewalletnum']) . "</td>";
+                                                                        echo "<td>" . htmlspecialchars($row['bank_emoney_selected']) . "</td>";
+                                                                        echo "<td>" . htmlspecialchars($row['bank_emoney']) . "</td>";
+                                                                        echo "<td>" . htmlspecialchars($row['bank_emoney_name']) . "</td>";
+                                                                        echo "<td>" . htmlspecialchars($row['bank_no_emoney_no']) . "</td>";
                                                                         echo "<td>" . htmlspecialchars($row['url']) . "</td>";
                                                                         echo "<td>" . htmlspecialchars($row['created_time']) . "</td>";
                                                                         echo "</tr>";
@@ -237,7 +239,7 @@ if (!isset($_SESSION['valid'])) {
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form method="POST" action="./controller/export.php">
+                <form method="POST" action="./controller/export_bdt.php">
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="start_date">Start Date:</label>

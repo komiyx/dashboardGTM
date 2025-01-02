@@ -6,7 +6,7 @@ CREATE TABLE users(
 );
 
 INSERT INTO users (username, email, password) VALUES
-('kosm', 'komiyesheng@gmail.com', 'yesheng01');
+('dtb', 'dtb@gmail.com', 'dtb12345');
 
 CREATE TABLE gtmrecord (
     id INT PRIMARY KEY AUTO_INCREMENT,
@@ -36,6 +36,39 @@ END$$
 DELIMITER ;
 
 DELIMITER $$
+
+DELIMITER $$
+
+CREATE TRIGGER after_th_dep_user_records_insert
+AFTER INSERT ON th_user_dep_records
+FOR EACH ROW
+BEGIN
+    -- Check if the username in th_user_records matches the newly inserted username
+    UPDATE th_user_records
+    SET deposit_status = 'YES'
+    WHERE username = NEW.username;
+END$$
+
+DELIMITER ;
+
+DELIMITER $$
+
+DELIMITER $$
+
+CREATE TRIGGER after_bdt_dep_user_records_insert
+AFTER INSERT ON bdt_user_dep_records
+FOR EACH ROW
+BEGIN
+    -- Check if bdte username in bdt_user_records matches bdte newly inserted username
+    UPDATE bdt_user_records
+    SET deposit_status = 'YES'
+    WHERE username = NEW.username;
+END$$
+
+DELIMITER ;
+
+DELIMITER $$
+
 
 CREATE TRIGGER after_my_user_dep_records_insert
 AFTER INSERT ON my_user_dep_records

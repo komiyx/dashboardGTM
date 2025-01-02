@@ -89,7 +89,7 @@ if (!isset($_SESSION['valid'])) {
                                         </div>
                                     </a>
                                 </li>
-                                <li class="el-menu-item menu-item load-content  is-active">
+                                <li class="el-menu-item menu-item load-content is-active">
                                     <a href="./th_data.php" class="el-menu-item">
                                         <div class="menu-item-content d-flex align-items-center">
                                             <i class="fa-brands fa-app-store"></i>
@@ -174,9 +174,10 @@ if (!isset($_SESSION['valid'])) {
                                                                 <th>FullName</th>
                                                                 <th>Email</th>
                                                                 <th>Mobile</th>
-                                                                <th>bank</th>
-                                                                <th>bankno</th>
-                                                                <th>ewalletnum</th>
+                                                                <th>Bank / Emoney Selected</th>
+                                                                <th>Bank / Emoney </th>
+                                                                <th>Bank / Emoney Name</th>
+                                                                <th>BankNo / EmoneyNo</th>
                                                                 <th>URL</th>
                                                                 <th>Created Time</th>
                                                             </tr>
@@ -184,9 +185,9 @@ if (!isset($_SESSION['valid'])) {
                                                         <tbody>
                                                             <?php
 
-                                                                $query = "SELECT *
+                                                                $query = "SELECT username, password, fullname, email, deposit_status, mobile, bank_emoney_selected, bank_emoney, bank_emoney_name, bank_no_emoney_no, url, created_time 
                                                                         FROM th_user_records 
-                                                                        ORDER BY deposit_status DESC, created_time DESC LIMIT 20000";
+                                                                        ORDER BY deposit_status DESC, created_time DESC LIMIT 10000";
 
                                                                 $result = $conn->query($query);
                                                                 
@@ -201,9 +202,10 @@ if (!isset($_SESSION['valid'])) {
                                                                         echo "<td>" . htmlspecialchars($row['fullname']) . "</td>";
                                                                         echo "<td>" . htmlspecialchars($row['email']) . "</td>";
                                                                         echo "<td>" . htmlspecialchars($row['mobile']) . "</td>";
-                                                                        echo "<td>" . htmlspecialchars($row['bank']) . "</td>";
-                                                                        echo "<td>" . htmlspecialchars($row['bankno']) . "</td>";
-                                                                        echo "<td>" . htmlspecialchars($row['ewalletnum']) . "</td>";
+                                                                        echo "<td>" . htmlspecialchars($row['bank_emoney_selected']) . "</td>";
+                                                                        echo "<td>" . htmlspecialchars($row['bank_emoney']) . "</td>";
+                                                                        echo "<td>" . htmlspecialchars($row['bank_emoney_name']) . "</td>";
+                                                                        echo "<td>" . htmlspecialchars($row['bank_no_emoney_no']) . "</td>";
                                                                         echo "<td>" . htmlspecialchars($row['url']) . "</td>";
                                                                         echo "<td>" . htmlspecialchars($row['created_time']) . "</td>";
                                                                         echo "</tr>";
@@ -250,12 +252,12 @@ if (!isset($_SESSION['valid'])) {
                         <div class="form-group">
                             <label for="limit">Number of Data:</label>
                             <select class="form-control" id="limit" name="limit" required>
-                                <option value="all">All Records</option>
                                 <option value="100">100</option>
                                 <option value="500">500</option>
                                 <option value="1000">1000</option>
                                 <option value="5000">5000</option>
                                 <option value="10000">10000</option>
+                                <option value="all">All Records</option>
                             </select>
                         </div>
                     </div>
