@@ -188,6 +188,7 @@ if (!isset($_SESSION['valid'])) {
                                                                 'BDT' => ['mcw','bigtaka','bhaggo','jitaace',],
                                                                 'TH' => ['ddmm'],
                                                                 'AUD' => ['pp99'],
+                                                                'HK' => ['fungam'],
                                                             ];
 
                                                             // Map countries to respective tables
@@ -197,6 +198,7 @@ if (!isset($_SESSION['valid'])) {
                                                                 'BDT' => 'bdt_user_records',
                                                                 'TH' => 'th_user_records',
                                                                 'AUD' => 'aud_user_records',
+                                                                'HK' => 'hk_user_records',
                                                             ];
 
                                                             $subqueries = [];
@@ -240,9 +242,11 @@ if (!isset($_SESSION['valid'])) {
                                                                                 ? '#93ffe2' 
                                                                                 : ($row['country'] === 'TH' 
                                                                                     ? '#ffc1e3' 
-                                                                                    : ($row['country'] ==='AUD' 
-                                                                                    ? '#ff712b' 
-                                                                                    : 'transparent'))))) . ";'>" . 
+                                                                                    : ($row['country'] === 'HK' 
+                                                                                        ? '#66f7ff' 
+                                                                                        : ($row['country'] ==='AUD' 
+                                                                                        ? '#ff712b' 
+                                                                                        : 'transparent')))))) . ";'>" . 
                                                                     htmlspecialchars($row['country']) . 
                                                                     "</td>";
                                                                     echo "<td>" . htmlspecialchars($row['brandname']) . "</td>";

@@ -15,7 +15,7 @@ if (!isset($_SESSION['valid'])) {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <title>GTMBest - AUD Data</title>
+    <title>GTMBest - HK Data</title>
     <link rel="icon" type="image/png" href="img/aside-logo.png">
     <link type="text/css" rel="stylesheet" href="./flaviusmatis-simplePagination.js-da97104/simplePagination.css"/>
     <link rel="preload" as="style" onload="this.onload=null; this.rel='stylesheet'" href="./css/style.css">
@@ -119,7 +119,7 @@ if (!isset($_SESSION['valid'])) {
                                 <div class="placeholder"></div>
                                 <div class="header d-flex justify-content-between align-items-center">
                                     <div class="title-top-nav text-uppercase">
-                                        AUD Data
+                                        HK Data
                                     </div>
                                     <div class="d-flex items-ceter pr-5">
                                         <div class="d-flex items-center mr-5">
@@ -186,7 +186,7 @@ if (!isset($_SESSION['valid'])) {
                                                             <?php
 
                                                                 $query = "SELECT username, password, fullname, email, deposit_status, mobile, bank_emoney_selected, bank_emoney, bank_emoney_name, bank_no_emoney_no, url, created_time 
-                                                                        FROM aud_user_records 
+                                                                        FROM hk_user_records 
                                                                         ORDER BY deposit_status DESC, created_time DESC LIMIT 10000";
 
                                                                 $result = $conn->query($query);
@@ -239,7 +239,7 @@ if (!isset($_SESSION['valid'])) {
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form method="POST" action="./controller/export_aud.php">
+                <form method="POST" action="./controller/export_hk.php">
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="start_date">Start Date:</label>
