@@ -59,18 +59,19 @@ $record = $result->fetch_assoc();
             <div class="form-group">
                 <label for="register">Register</label>
                 <select class="form-control" id="register" name="register" required>
-                    <option value="Yes" <?= $record['register'] === 'Yes' ? 'selected' : '' ?>>Yes</option>
-                    <option value="No" <?= $record['register'] === 'No' ? 'selected' : '' ?>>No</option>
+                    <option value="YES" <?php if ($record['register'] == "YES") echo "selected"; ?>>YES</option>
+                    <option value="NO"<?php if ($record['register'] == "NO") echo "selected"; ?>>NO</option>
                 </select>
             </div>
 
             <div class="form-group">
                 <label for="deposit">Deposit</label>
                 <select class="form-control" id="deposit" name="deposit" required>
-                    <option value="Yes" <?= $record['deposit'] === 'Yes' ? 'selected' : '' ?>>Yes</option>
-                    <option value="No" <?= $record['deposit'] === 'No' ? 'selected' : '' ?>>No</option>
+                <option value="YES" <?php if ($record['deposit'] == "YES") echo "selected"; ?>>YES</option>
+                <option value="NO"<?php if ($record['deposit'] == "NO") echo "selected"; ?>>NO</option>
                 </select>
             </div>
+
 
 
             <button type="submit" class="btn btn-primary">Save Changes</button>

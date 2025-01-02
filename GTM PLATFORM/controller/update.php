@@ -10,8 +10,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $brandname = htmlspecialchars($_POST['brandname']);
     $url = htmlspecialchars($_POST['url']);
     $installdate = htmlspecialchars($_POST['installdate']);
-    $register = intval($_POST['register']);
-    $deposit = intval($_POST['deposit']);
+    $register = htmlspecialchars($_POST['register']);
+    $deposit = htmlspecialchars($_POST['deposit']);
 
     // Update the record
     $query = "UPDATE gtmrecord SET country = ?, brandname = ?, url = ?, installdate = ?, register = ?, deposit = ? WHERE id = ?";
