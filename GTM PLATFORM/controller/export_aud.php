@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Build the query
-    $query = "SELECT * FROM hk_user_records WHERE created_time BETWEEN ? AND ?";
+    $query = "SELECT * FROM aud_user_records WHERE created_time BETWEEN ? AND ?";
     if ($limit !== 'all') {
         $query .= " LIMIT ?";
     }

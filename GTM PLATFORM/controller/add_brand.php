@@ -9,7 +9,7 @@ if (isset($_POST['submit'])) {
     $deposit = $_POST['deposit'];
 
     // Get the current date in d/m/Y format
-    $installdate = date("d/m/Y");
+    $installdate = date("Y-m-d");
 
     // Update the SQL query to include installdate
     $sql = "INSERT INTO gtmrecord (country, brandname, url, register, deposit, installdate) VALUES (?, ?, ?, ?, ?, ?)";

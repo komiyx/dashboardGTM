@@ -67,6 +67,14 @@ if (!isset($_SESSION['valid'])) {
                                         </div>
                                     </a>
                                 </li>
+                                <li class="el-menu-item menu-item load-content">
+                                    <a href="./newdata.php" class="el-menu-item">
+                                        <div class="menu-item-content d-flex align-items-center">
+                                            <i class="fa-solid fa-circle-plus"></i>
+                                            <span class="text-capitalize ml-3">Summary</span>
+                                        </div>
+                                    </a>
+                                </li>
                                 <div class="d-flex align-items-center">
                                     <div class="menu-item-title ">
                                         Section
@@ -101,6 +109,22 @@ if (!isset($_SESSION['valid'])) {
                                         <div class="menu-item-content d-flex align-items-center">
                                             <i class="fa-brands fa-app-store"></i>
                                             <span class="text-capitalize ml-3">BDT DATA</span>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="el-menu-item menu-item load-content">
+                                    <a href="./aud_data.php" class="el-menu-item">
+                                        <div class="menu-item-content d-flex align-items-center">
+                                            <i class="fa-brands fa-app-store"></i>
+                                            <span class="text-capitalize ml-3">AUD DATA</span>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="el-menu-item menu-item load-content">
+                                    <a href="./hk_data.php" class="el-menu-item">
+                                        <div class="menu-item-content d-flex align-items-center">
+                                            <i class="fa-brands fa-app-store"></i>
+                                            <span class="text-capitalize ml-3">HK DATA</span>
                                         </div>
                                     </a>
                                 </li>
@@ -171,14 +195,14 @@ if (!isset($_SESSION['valid'])) {
                                                         <?php
                                                             // Define targets for each country
                                                             $countryTargets = [
-                                                                'MY' => ['ant','eezy','uea8'],
+                                                                'MY' => ['ant','eezy','uea8','iplay'],
                                                                 'INDO' => ['target', 'arena', 'ayo', 'tajir', 'pg', 'alitoto', 'plustogel', 'platinumslot', 'maxtoto',
                                                             'puma99', 'megafafa', 'auroratoto', 'garuda','bomjudi','asiagam1ng','ponsel','sgaresmi','bucin',
                                                             'resmi','detogoat','ligadewa'],
-                                                                'BDT' => ['mcw','bigtaka','bhaggo','jitaace',],
+                                                                'BDT' => ['mcw','bigtaka','bhaggo','jitaace','tcl99'],
                                                                 'TH' => ['ddmm'],
                                                                 'AUD' => ['pp99'],
-                                                                'HK' => ['fungam'],
+                                                                'HK' => ['fungam','tcl99'],
                                                             ];
 
                                                             // Map countries to respective tables
@@ -212,14 +236,18 @@ if (!isset($_SESSION['valid'])) {
                                                                 }
                                                             }
 
-                                                            $today = date('d/m/Y');
+                                                            $today = date('Y-m-d');  // Current date in YYYY-MM-DD
 
-                                                            // SQL query to fetch records for the current week
-                                                            $query = "SELECT gtmrecord.*, " . implode(", ", $subqueries) . " 
-                                                                    FROM gtmrecord 
-                                                                    WHERE YEARWEEK(STR_TO_DATE(installdate, '%d/%m/%Y'), 1) = YEARWEEK(STR_TO_DATE('$today', '%d/%m/%Y'), 1) 
-                                                                    ORDER BY id DESC";
-
+                                                            $query = "
+                                                              SELECT gtmrecord.*, " . implode(', ', $subqueries) . "
+                                                              FROM gtmrecord
+                                                              WHERE YEARWEEK(
+                                                                STR_TO_DATE(installdate, '%Y-%m-%d'), 1
+                                                              ) = YEARWEEK(
+                                                                STR_TO_DATE('$today', '%Y-%m-%d'), 1
+                                                              )
+                                                              ORDER BY installdate DESC
+                                                            ";
                                                             $result = $conn->query($query);
 
                                                             // Check if there are results

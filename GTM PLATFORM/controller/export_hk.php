@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Build the query
-    $query = "SELECT * FROM aud_user_records WHERE created_time BETWEEN ? AND ?";
+    $query = "SELECT * FROM hk_user_records WHERE created_time BETWEEN ? AND ?";
     if ($limit !== 'all') {
         $query .= " LIMIT ?";
     }
@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Set headers for Excel export
     header('Content-Type: application/vnd.ms-excel');
-    header('Content-Disposition: attachment; filename="aud_user_records_' . $startDate . '_to_' . $endDate . '.xls"');
+    header('Content-Disposition: attachment; filename="hk_user_records_' . $startDate . '_to_' . $endDate . '.xls"');
     header('Pragma: no-cache');
     header('Expires: 0');
 

@@ -68,6 +68,14 @@ if (!isset($_SESSION['valid'])) {
                                         </div>
                                     </a>
                                 </li>
+                                <li class="el-menu-item menu-item load-content">
+                                    <a href="./newdata.php" class="el-menu-item">
+                                        <div class="menu-item-content d-flex align-items-center">
+                                            <i class="fa-solid fa-circle-plus"></i>
+                                            <span class="text-capitalize ml-3">Summary</span>
+                                        </div>
+                                    </a>
+                                </li>
                                 <div class="d-flex align-items-center">
                                     <div class="menu-item-title ">
                                         Section
