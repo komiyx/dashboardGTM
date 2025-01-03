@@ -71,7 +71,7 @@ if (!isset($_SESSION['valid'])) {
                                 <li class="el-menu-item menu-item load-content is-active">
                                     <a href="./newdata.php" class="el-menu-item">
                                         <div class="menu-item-content d-flex align-items-center">
-                                            <i class="fa-solid fa-circle-plus"></i>
+                                        <i class="fa-solid fa-clipboard-list"></i>
                                             <span class="text-capitalize ml-3">Summary</span>
                                         </div>
                                     </a>
@@ -143,7 +143,7 @@ if (!isset($_SESSION['valid'])) {
                                 <div class="placeholder"></div>
                                 <div class="header d-flex justify-content-between align-items-center">
                                     <div class="title-top-nav text-uppercase">
-                                        BDT Data
+                                        Summary
                                     </div>
                                     <div class="d-flex items-ceter pr-5">
                                         <div class="d-flex items-center mr-5">
@@ -172,80 +172,6 @@ if (!isset($_SESSION['valid'])) {
                                 <!-- import section -->
                                 <div class="wrapper" id="content">
 
-                                    <div class="card-container">
-                                        <div class="table-container">
-                                            <div class="header mb-3">
-                                                    <div class="el-row d-flex justify-content-between">
-                                                        <div class="el-row">
-                                                            <div class="el-form-item asterisk-left">
-                                                                <div class="el-form-item-content">
-                                                                    <button type="button" class="btn btn-primary" style="margin-left: 12px;" data-toggle="modal" data-target="#exportModal">
-                                                                        Export as Excel
-                                                                    </button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                            </div>
-                                            <div class="el-table-fit el-table">
-                                                <div class="table-responsive">
-                                                    <table class="table table-striped table-bordered">
-                                                        <thead class="thead-dark">
-                                                            <tr>
-                                                                <th style="min-width: 100px;">Deposit User</th>
-                                                                <th style="min-width: 100px;">Username</th>
-                                                                <th style="min-width: 130px;">Passowrd</th>
-                                                                <th>FullName</th>
-                                                                <th>Email</th>
-                                                                <th>Mobile</th>
-                                                                <th>Bank / Emoney Selected</th>
-                                                                <th>Bank / Emoney </th>
-                                                                <th>Bank / Emoney Name</th>
-                                                                <th>BankNo / EmoneyNo</th>
-                                                                <th>URL</th>
-                                                                <th>Created Time</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <?php
-
-                                                                $query = "SELECT username, password, fullname, email, deposit_status, mobile, bank_emoney_selected, bank_emoney, bank_emoney_name, bank_no_emoney_no, url, created_time 
-                                                                        FROM bdt_user_records 
-                                                                        ORDER BY deposit_status DESC, created_time DESC LIMIT 10000";
-
-                                                                $result = $conn->query($query);
-                                                                
-                                                                // Check if there are results
-                                                                if ($result && $result->num_rows > 0) {
-                                                                    // Loop through the results and output rows
-                                                                    while ($row = $result->fetch_assoc()) {
-                                                                        echo "<tr class='list-item'>";
-                                                                        echo "<td>" . htmlspecialchars($row['deposit_status']) . "</td>";
-                                                                        echo "<td>" . htmlspecialchars($row['username']) . "</td>";
-                                                                        echo "<td>" . htmlspecialchars($row['password']) . "</td>";
-                                                                        echo "<td>" . htmlspecialchars($row['fullname']) . "</td>";
-                                                                        echo "<td>" . htmlspecialchars($row['email']) . "</td>";
-                                                                        echo "<td>" . htmlspecialchars($row['mobile']) . "</td>";
-                                                                        echo "<td>" . htmlspecialchars($row['bank_emoney_selected']) . "</td>";
-                                                                        echo "<td>" . htmlspecialchars($row['bank_emoney']) . "</td>";
-                                                                        echo "<td>" . htmlspecialchars($row['bank_emoney_name']) . "</td>";
-                                                                        echo "<td>" . htmlspecialchars($row['bank_no_emoney_no']) . "</td>";
-                                                                        echo "<td>" . htmlspecialchars($row['url']) . "</td>";
-                                                                        echo "<td>" . htmlspecialchars($row['created_time']) . "</td>";
-                                                                        echo "</tr>";
-                                                                    }
-                                                                } else {
-                                                                    // If no data is found
-                                                                    echo "<tr><td colspan='11' class='text-center'>No records found.</td></tr>";
-                                                                }
-                                                            ?>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                                <div id="pagination-container" class="light-theme mt-4 d-flex justify-content-end"></div>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -254,45 +180,7 @@ if (!isset($_SESSION['valid'])) {
             </div>
         </div>
     </main>
-    <div class="modal fade" id="exportModal" tabindex="-1" role="dialog" aria-labelledby="exportModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exportModalLabel">Export by Filters</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <form method="POST" action="./controller/export_bdt.php">
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label for="start_date">Start Date:</label>
-                            <input type="date" class="form-control" id="start_date" name="start_date" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="end_date">End Date:</label>
-                            <input type="date" class="form-control" id="end_date" name="end_date" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="limit">Number of Data:</label>
-                            <select class="form-control" id="limit" name="limit" required>
-                                <option value="100">100</option>
-                                <option value="500">500</option>
-                                <option value="1000">1000</option>
-                                <option value="5000">5000</option>
-                                <option value="10000">10000</option>
-                                <option value="all">All Records</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-primary">Export</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="./flaviusmatis-simplePagination.js-da97104/jquery.simplePagination.js"></script>
     <script>

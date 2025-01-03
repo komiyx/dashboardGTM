@@ -15,7 +15,7 @@ CREATE TABLE gtmrecord (
     url VARCHAR(200),
     register VARCHAR(200),
     deposit VARCHAR(200),
-    installdate VARCHAR(10)
+    installdate date
 );
 
 ALTER TABLE indo_user_records ADD COLUMN deposit_status VARCHAR(3) DEFAULT '-';

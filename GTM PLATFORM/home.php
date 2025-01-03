@@ -68,7 +68,7 @@
                                     <li class="el-menu-item menu-item load-content">
                                     <a href="./newdata.php" class="el-menu-item">
                                         <div class="menu-item-content d-flex align-items-center">
-                                            <i class="fa-solid fa-circle-plus"></i>
+                                        <i class="fa-solid fa-clipboard-list"></i>
                                             <span class="text-capitalize ml-3">Summary</span>
                                         </div>
                                     </a>
@@ -170,13 +170,26 @@
                                     <div class="wrapper" id="content">
 
                                         <div class="card-container">
+                                            <div class="header mb-3 px-3">
+                                                <div class="el-row d-flex justify-content-between">
+                                                    <div class="el-row">
+                                                        <div class="el-form-item asterisk-left">
+                                                            <div class="el-form-item-content">
+                                                                <a href="./controller/export_all.php" class="btn btn-primary">Export as CSV</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <div class="table-container">
                                                 <div class="header mb-3">
                                                     <form action="">
                                                         <div class="el-row d-flex justify-content-between">
                                                             <div class="el-row">
                                                                 <div class="col-12">
-                                                                    <button type="button" class="el-button el-button-primary px-4 py-1" data-toggle="modal"
+                                                                    <button type="button" style="
+                                                                            background-color: green;
+                                                                        " class="el-button el-button-primary px-4 py-1" data-toggle="modal"
                                                                     data-target="#addnew">
                                                                         <span>Add New</span>
                                                                     </button>
